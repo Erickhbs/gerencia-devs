@@ -7,7 +7,7 @@ e suas anuidades. Pensando nas necessidades do gerente, listamos abaixo as funci
 
 - Cadastro de anuidades, com: Ano e Valor.
     - Cada ano, o valor da anuidade pode ser diferente. Ex: 2022 = R$100,00 / 2023 = R$110,00 / 2024 = R$ 150,00. 
-    - Esse valor deve ser facilmente ajustado pelo gerente.
+    - Esse valor deve ser facilmente ajustado pelo gerente. 
 
 - Cobrança das anuidades do associado.
     - "Checkout" das anuidades devidas pelo associado, calculando valor devido por anuidade e valor total devido.
