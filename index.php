@@ -15,6 +15,8 @@
     //criei esta variavel para fazer a função de controller
     $navegacao = $_GET['navegacao'] ?? '';
 
+    $page = isset($_GET['navegacao']) ? $_GET['navegacao'] : 'inicio';
+
     /* todas as funcoes da aplicacao */
 
     //ver se o formulario de cadastro de associado foi enviado e qual o tipo de cadastro sera feio
@@ -122,7 +124,7 @@
             echo "<button onclick='window.location.href=\"\";'>Voltar</button>";
 
             die();
-            
+
 
         } catch (PDOException $e) {
             die(response("Falha na inserção: " . $e->getMessage(), false));
@@ -153,7 +155,7 @@
         try {
 
             if (seeIfAnuidadeExists($ano) > 0) {
-                return;
+               echo "nada feito";
             }
 
             //criando a query responsável por inserir o associado no bd
@@ -252,18 +254,205 @@
     }
 ?>
 
+
+
+<!-- pagina html -->
 <!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
         <title>site</title>
         <style>
+            @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+            * {
+                font-family: 'Poppins', sans-serif;
+                padding: 0;
+                margin: 0;
+                box-sizing: border-box;
+            }
+            :root {
+                /* CORES A SEREM USADAS */
+                --body-color: #D9D9D9;
+                --sidebar-color: #355E3B;
+                --primary-color: #8a9a5b;
+                --toggle-color: #1F2D2C;
+                --text-color: #fff;
+                --selection-color: #013220;
+                /* TRANSIÇÕES */
+                --tran-01: all 0.1 ease;
+                --tran-02: all 0.2 ease;
+                --tran-03: all 0.3 ease;
+                --tran-04: all 0.4 ease;
+                --tran-05: all 0.5 ease;
+            }
+            body {
+                height: 100vh;
+                background: var(--body-color);
+            }
+            .sidebar {
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 275px;
+                padding: 10px 14px;
+                background: var(--sidebar-color);
+            }
+            .sidebar header {
+                position: relative;
+            }
+            .sidebar .image-text {
+                display: flex;
+                align-items: center;
+            }
+            .sidebar .image-text .image {
+                width: 60px;
+                height: 60px;
+                border-radius: 6px;
+            }
+            .sidebar header .image-text .header-text {
+                display: flex;
+                padding: 10px;
+                flex-direction: column;
+                color: var(--text-color);
+            }
+            .header-text .name {
+                font-weight: 600;
+            }
+            .header-text .professional {
+                margin-top: -2px;
+            }
+            .sidebar header .toggle {
+                position: absolute;
+                top: 50%;
+                right: -15%;
+                transform: translateY(-55%);
+                height: 35px;
+                width: 35px;
+                background: var(--primary-color);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+                color: var(--text-color);
+                font-size: 22px;
+            }
+            .sidebar li {
+                height: 50px;
+                margin-top: 10px;
+                list-style: none;
+                display: flex;
+                align-items: center;
+                padding: 0 10px;
+                border-radius: 8px;
+                transition: var(--tran-05);
+            }
+            .sidebar li a {
+                display: flex;
+                align-items: center;
+                text-decoration: none;
+                color: var(--text-color);
+                width: 100%;
+                padding: 10px;
+            }
+            .sidebar li .icon {
+                font-size: 20px;
+                margin-right: 8px;
+                transition: var(--tran-05);
+            }
+            .sidebar li .text {
+                font-weight: 500;
+                transition: var(--tran-05);
+            }
+            .sidebar li:hover {
+                background: var(--selection-color);
+                color: var(--text-color);
+            }
+            .sidebar li.active {
+                background: var(--selection-color);
+                color: var(--text-color);
+            }
+            .sidebar li.active .icon,
+            .sidebar li.active .text {
+                color: var(--text-color);
+            }
 
+            .panel{
+                height: 100vh;
+                width: calc(100%-88px);
+                position: relative;
+                left: 275px;
+                background: var(--body-color);
+            }
         </style>
     </head>
     <body>
-        <?php 
+        <nav class="sidebar">
+            <header>
+                <div class="image-text">
+                    <span class="image">
+                        <img class="image" src="https://img.freepik.com/vetores-gratis/fundo-abstrato-gradiente-monocromatico_52683-74300.jpg" alt="fundo-abstrato-gradiente-monocromatico">
+                    </span>
+                    <div class="text header-text">
+                        <span class="name">Gerencia dev</span>
+                        <span class="professional">Administrador</span>
+                    </div>
+                </div>
+            </header>
+            <div class="menu-bar">
+                <div class="menu">
+                    <ul class="menu-links">
+                        <li class="nav-link <?php echo ($page == 'inicio') ? 'active' : ''; ?>">
+                            <a href="/gerencia_devs/">
+                                <i class='bx bx-home icon'></i>
+                                <span class="text nav-text">Inicio</span>
+                            </a>
+                        </li>
+                        <li class="nav-link <?php echo ($page == 'cadastro_associado') ? 'active' : ''; ?>">
+                            <a href="/gerencia_devs/?navegacao=cadastro_associado">
+                                <i class='bx bx-user icon'></i>
+                                <span class="text nav-text">Associados</span>
+                            </a>
+                        </li>
+                        <li class="nav-link <?php echo ($page == 'cadastro_anuidade') ? 'active' : ''; ?>">
+                            <a href="/gerencia_devs/?navegacao=cadastro_anuidade">
+                                <i class='bx bx-calendar icon'></i>
+                                <span class="text nav-text">Anuidade</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+        <section class="panel">
+            <div class="algo">
+                <p>aaaaaaaaaaaaaaaaaaaaa</p>
+            </div>
+        </section>
+    </body>
+</html>
+
+
+
+<!-- 
+            <h3>Cadastrar Associado</h3>
+            <form action="" method="post">
+                <input type="text" name="name" placeholder="nome e sobrenome" require><br>
+                <input type="email" name="email" placeholder="email do associado" require><br>
+                <input type="text" name="cpf" placeholder="cpf do associado" require><br>
+                <button type="submit">Cadastrar</button><br>
+            </form>
+
+            <h1>Navegação</h1>
+            <"ul>
+                <li><a href="?navegacao=cadastro_anuidade">Anuidade</a></li>
+                <li><a href="?navegacao=cadastro_associado">Associados</a></li>
+                <li>Sobre</li>
+            </ul>"
+
+
             if($navegacao == "cadastro_associado"){
                 echo
                 '<h3>Cadastrar Associado</h3>
@@ -285,29 +474,5 @@
                     <button type="submit">Cadastrar</button><br>
                 </form>
                 ';
-            }else{
-                echo 
-                '
-                <h1>Navegação</h1>
-                <ul>
-                    <li><a href="?navegacao=cadastro_anuidade">Anuidade</a></li>
-                    <li><a href="?navegacao=cadastro_associado">Associados</a></li>
-                    <li>Sobre</li>
-                </ul>
-                ';
             }
-        ?>
-        <!-- 
-            <h3>Cadastrar Associado</h3>
-            <form action="" method="post">
-                <input type="text" name="name" placeholder="nome e sobrenome" require><br>
-                <input type="email" name="email" placeholder="email do associado" require><br>
-                <input type="text" name="cpf" placeholder="cpf do associado" require><br>
-                <button type="submit">Cadastrar</button><br>
-            </form>
         -->
-    </body>
-</html>
-
-
-
