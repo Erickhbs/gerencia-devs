@@ -19,7 +19,7 @@
 
     //ver se o formulario de cadastro de associado foi enviado e qual o tipo de cadastro sera feio
     if($_SERVER["REQUEST_METHOD"] == "POST") {
-        $action = $_POST['action'] ?? '';
+        $action = $_POST['action'] ?? 'tela_inicio';
         
         switch ($action) {
             case 'create_anuidade':
@@ -49,6 +49,13 @@
         }
     }
 
+    function message($message, $success = true){
+        return [
+            'message' => $message,
+            'success' => $success
+        ];
+    }
+
     //funcao responsavel por conectar no banco MySQL
     function conectToMysql($dsn, $dbusername, $dbpassword) {
         try {
@@ -56,10 +63,11 @@
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $pdo;
         } catch (PDOException $e) {
-            die('Falha na conexão: ' . $e->getMessage());
+            die(message("Falha na conexão". $e->getMessage(), false));
         }
-    }
+    }   
 
+    //funcao para ver se ja existe um associado com o mesmo cpf e/ou email
     function seeIfAssociadoExists($email, $cpf) {
         global $pdo;
         $query = "SELECT COUNT(*) FROM associado WHERE email = ? OR cpf = ?";
@@ -67,6 +75,16 @@
         $statement->execute([$email, $cpf]);
         $associadoExistente = $statement->fetchColumn();
         return $associadoExistente > 0;
+    }
+
+    //funcao para ver se ja existem pagamentos para esse associado
+    function seeIfPaymentExists($associadoId) {
+        global $pdo;
+        $query = "SELECT COUNT(*) FROM pagamento WHERE associado_id = ?";
+        $statement = $pdo->prepare($query);
+        $statement->execute([$associadoId]);
+        $pagamentosExistentes = $statement->fetchColumn();
+        return $pagamentosExistentes;
     }
 
     //funcao responsavel por inserir um novo associado \'POST'/
@@ -78,7 +96,7 @@
             if (seeIfAssociadoExists($email, $cpf)) {
                 echo "<p>Já existe um associado cadastrado com o email ou CPF fornecido.</p>";
                 echo "<button onclick='window.location.href=\"\";'>Voltar</button>";
-                return;
+                return message("Já existe um associado cadastrado com o email ou CPF fornecido", false);
             }
 
             //criando a query responsável por inserir o associado no bd
@@ -90,24 +108,36 @@
 
             //apenas para limpar o espaço da memoria
             $statement = null;
+            $query = null;
+
+            // Pegando o id do novo associado
+            $associadoId = $pdo->lastInsertId();
+            //criando as tabelas pagementos para o novo associado
+            if(seeIfPaymentExists($associadoId) == 0){
+                createPagamentoPerAnuidade($associadoId);
+            }
 
             // Mensagem de confirmação e botão para voltar
             echo "<p>Associado cadastrado com sucesso!</p>";
             echo "<button onclick='window.location.href=\"\";'>Voltar</button>";
 
             die();
+            
 
         } catch (PDOException $e) {
-            die("falha na inserção: " . $e->getMessage());
+            die(response("Falha na inserção: " . $e->getMessage(), false));
         }
     }
 
     //funcao responsavel por deletar um associado \'DELETE'/
-    function deleteAssociado(){}
+    function deleteAssociado(){
+        
+    }
 
     //funcao responsavel por ATUALIZAR um associado \'PUT'/
     function updateAssociado(){}
 
+    //funcao para ver se ja existe uma anuidade no ano especifico
     function seeIfAnuidadeExists($ano){
         global $pdo;
         $query = "SELECT COUNT(*) FROM anuidade WHERE a_year = ?";
@@ -115,16 +145,14 @@
         $statement->execute([$ano]);
         $anuidadeExistente = $statement->fetchColumn();
         return $anuidadeExistente;
-
     }
+
     //funcao responsavel por criar uma nova anuidade \'POST'/
     function createAnuidade($ano, $valor){
         global $pdo;
         try {
 
             if (seeIfAnuidadeExists($ano) > 0) {
-                echo "<p>Já existe uma anuidade cadastrada para o ano $ano.</p>";
-                echo "<button onclick='window.location.href=\"\";'>Voltar</button>";
                 return;
             }
 
@@ -135,7 +163,7 @@
             $statement = $pdo->prepare($query);
             $statement->execute([$ano, $valor]);
 
-            createPagamento($ano);
+            createPagamento(null, $ano);
 
             //apenas para limpar o espaço da memoria
             $statement = null;
@@ -161,27 +189,59 @@
         }
     }
 
-    //criar a tabela pagamento para os associados
-    function createPagamento($ano){
+    //funcao para criar a tabela pagamento para o associados apos a criacao de uma nova anuidade
+    function createPagamento($associadoId, $ano){
         global $pdo;
         try {
-            $query = "SELECT id FROM associado;";
-            $statement = $pdo->prepare($query);
-            $statement->execute();
-            $associados = $statement->fetchAll(PDO::FETCH_ASSOC);
+            if($associadoId == null){
+                $query = "SELECT id FROM associado;";
+                $statement = $pdo->prepare($query);
+                $statement->execute();
+                $associados = $statement->fetchAll(PDO::FETCH_ASSOC);
+    
+                 // Inserir um registro de pagamento para cada associado para a nova anuidade
+                $query = "INSERT INTO pagamento (associado_id, ano) VALUES (?, ?);";
+                $statement = $pdo->prepare($query);
+                
+                foreach ($associados as $associado) {
+                    $statement->execute([$associado['id'],$ano]);
+                }
+                return;
+            }
 
-             // Inserir um registro de pagamento para cada associado para a nova anuidade
+            // Insere o pagamento para o associado e a anuidade
             $query = "INSERT INTO pagamento (associado_id, ano) VALUES (?, ?);";
             $statement = $pdo->prepare($query);
-            
-            foreach ($associados as $associado) {
-                $statement->execute([$associado['id'],$ano]);
-            }
+            $statement->execute([$associadoId, $ano]);
+
+            // Limpar a memória
+            $statement = null;
+           
         } catch (PDOException $e) {
             die("falha na inserção: " . $e->getMessage());
         }
     }
 
+    //funcao para criar pagamentos para a anuidade do ano e para os anos seguintes (se existir)
+    function createPagamentoPerAnuidade($associadoId){
+        global $pdo;
+        try {
+            //anuidades no o ano atual e seguintes
+            $query = "SELECT a_year FROM anuidade WHERE a_year >= ? ORDER BY a_year ASC";
+            $statement = $pdo->prepare($query);
+            $statement->execute([date("Y")]);
+            $anuidades = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+            //Chama a função createPagamento para cada anuidade encontrada
+            foreach ($anuidades as $anuidade) {
+                createPagamento($associadoId, $anuidade['a_year']);
+            }
+        } catch (PDOException $e) {
+            die("falha ao criar pagamentos: " . $e->getMessage());
+        }
+    }
+
+    //funcacao para atualizar o pagamento
     function updatePagamento($id){
         global $pdo;
         try {
