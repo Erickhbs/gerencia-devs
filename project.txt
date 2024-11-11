@@ -23,9 +23,9 @@ e suas anuidades. Pensando nas necessidades do gerente, listamos abaixo as funci
 
 Regras para o desenvolvimento
 
-- A aplicação deve ser um monolito fullstack, escrita em PHP Puro (sem framework)
-- Use um banco de dados relacional
-- Use git para versionar seu código
-- Na raiz do seu projeto crie um arquivo chamado meu_database.sql e adicione o sql de criação do seu banco de dados
+- A aplicação deve ser um monolito fullstack, escrita em PHP Puro (sem framework) - (._. )
+- Use um banco de dados relacional - estou usando o MySQL
+- Use git para versionar seu código - vdb
+- Na raiz do seu projeto crie um arquivo chamado meu_database.sql e adicione o sql de criação do seu banco de dados - tera 15 associados e 3 anuidades
 - Poste seu projeto no github e envie o link respondendo este e-mail até o dia 11/11/2024 às 23:59.
 - No README do seu projeto deixe as instruções de como instalar e testar sua aplicação.
