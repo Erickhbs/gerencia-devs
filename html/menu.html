@@ -1,0 +1,26 @@
+
+
+<div class="menu-bar">
+    <div class="menu">
+        <ul class="menu-links">
+            <li class="nav-link <?php echo ($page == 'inicio') ? 'active' : ''; ?>">
+                <a href="/gerencia_devs/">
+                    <i class='bx bx-home icon'></i>
+                    <span class="text nav-text">Inicio</span>
+                </a>
+            </li>
+            <li class="nav-link <?php echo ($page == 'cadastro_associado') ? 'active' : ''; ?>">
+                <a href="/gerencia_devs/?navegacao=cadastro_associado">
+                    <i class='bx bx-user icon'></i>
+                    <span class="text nav-text">Associados</span>
+                </a>
+            </li>
+            <li class="nav-link <?php echo ($page == 'cadastro_anuidade') ? 'active' : ''; ?>">
+                <a href="/gerencia_devs/?navegacao=cadastro_anuidade">
+                    <i class='bx bx-calendar icon'></i>
+                    <span class="text nav-text">Anuidade</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</div>
