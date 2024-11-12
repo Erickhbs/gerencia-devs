@@ -1,5 +1,7 @@
 <?php 
     /* conexao com o MySQL para usar como bd */
+    executeInitialSQL();
+
     include_once 'includes/bdh.inc.php';
     include_once 'includes/associado.inc.php';
     include_once 'includes/func-helper.inc.php';
