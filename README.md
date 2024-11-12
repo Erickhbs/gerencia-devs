@@ -1,4 +1,4 @@
-# Título do projeto
+# Gerencia-Devs
 
 Um projeto para o gerente da associação Devs do RN poder ter melhor axesso às informações da associação
 
@@ -12,7 +12,7 @@ Consulte **[Implantação](#-implanta%C3%A7%C3%A3o)** para saber como implantar 
 
 Seu sistema operacional ser Windows
 Você precisa do XAMPP intalado e do PHP
-
+ter um editor já configurado para PHP ou VISUAL STUDIO CODE
 
 ### 🔧 Instalação
 
@@ -49,71 +49,71 @@ cd .\xampp\htdocs\
 Apague tudo, baixe o zip do projeto e extraia dentro da pasta.
 
 Caso esteja utilizando o VISUAL STUDIO CODE, algumas coisas precisam ser
-feitas para que ele identifique o PHP que veio junto ao XAMPP.
+Feitas para que ele identifique o PHP que veio junto ao XAMPP.
 Primeiro de tudo abra o editor!
 
- <img src="https://lh3.google.com/u/0/d/1cEA9J9DV-1x6BXRob5gt79wM23LW8PhS=w1920-h918-iv1" alt="print">
+Vá em/ou:
+```
+file -> preferences -> settings
+```
+```
+arquivo -> preferencias -> configurações
+```
+<img src="/img/guide-1.png" alt="print-1">
+
+Vá em/ou:
+```
+extensions -> PHP -> Edit in settings.json
+```
+```
+extensões -> PHP -> Editar em settings.json
+```
+<img src="/img/guide-2.png" alt="print-2">
+
+escreva, caso não haja, ou modifique adicionando o path da sua máquina:
+
+<img src="/img/guide-3.png" alt="print-3">
+
+A com isso seu ambiente está pronto! :)
 
 ## ⚙️ Executando os testes
 
-Explicar como executar os testes automatizados para este sistema.
+iniciar os servidores que serão usados Apache e MySQL:
 
-### 🔩 Analise os testes de ponta a ponta
+<img src="/img/guide-4.png" alt="print-4">
 
-Explique que eles verificam esses testes e porquê.
+Abra o navegador de sua escolha para ver se os servidores inicializaram corretamente e digite:
 
-```
-Dar exemplos
-```
-
-### ⌨️ E testes de estilo de codificação
-
-Explique que eles verificam esses testes e porquê.
+MySQL:
 
 ```
-Dar exemplos
+http://localhost/phpmyadmin/index.php
 ```
+<img src="/img/guide-5.png" alt="print-5">
 
-## 📦 Implantação
+Apache:
+```
+http://localhost
+```
+<img src="/img/guide-6.png" alt="print-6">
+Caso já tenha extraido o arquivo zip dentro da pasta, a pasta do projeto estrá à mostra, basta clicar!
 
-Adicione notas adicionais sobre como implantar isso em um sistema ativo
+E para editar o código, basta abrir a pasta no editor pelo PowerShell.
+### Caso haja algum erro no powerShell, mude as barras invertidas!
+```
+cd .\xampp\htdocs\gerencia-dev\
+code .
+```
 
 ## 🛠️ Construído com
 
 Mencione as ferramentas que você usou para criar seu projeto
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - O framework web usado
-* [Maven](https://maven.apache.org/) - Gerente de Dependência
-* [ROME](https://rometools.github.io/rome/) - Usada para gerar RSS
-
-## 🖇️ Colaborando
-
-Por favor, leia o [COLABORACAO.md](https://gist.github.com/usuario/linkParaInfoSobreContribuicoes) para obter detalhes sobre o nosso código de conduta e o processo para nos enviar pedidos de solicitação.
-
-## 📌 Versão
-
-Nós usamos [SemVer](http://semver.org/) para controle de versão. Para as versões disponíveis, observe as [tags neste repositório](https://github.com/suas/tags/do/projeto). 
-
-## ✒️ Autores
-
-Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
-
-* **Um desenvolvedor** - *Trabalho Inicial* - [umdesenvolvedor](https://github.com/linkParaPerfil)
-* **Fulano De Tal** - *Documentação* - [fulanodetal](https://github.com/linkParaPerfil)
-
-Você também pode ver a lista de todos os [colaboradores](https://github.com/usuario/projeto/colaboradores) que participaram deste projeto.
-
-## 📄 Licença
-
-Este projeto está sob a licença (sua licença) - veja o arquivo [LICENSE.md](https://github.com/usuario/projeto/licenca) para detalhes.
+* [PHP](https://www.php.net/manual/en/index.php) - A linguagem de programação usada
+* [XAMPP](https://www.apachefriends.org/docs/) - Gerente de Servidores
 
 ## 🎁 Expressões de gratidão
 
-* Conte a outras pessoas sobre este projeto 📢;
-* Convide alguém da equipe para uma cerveja 🍺;
-* Um agradecimento publicamente 🫂;
-* etc.
-
-
----
-⌨️ com ❤️ por [Armstrong Lohãns](https://gist.github.com/lohhans) 😊
+* Espero que apreciem o que foi feito, está incompleto mas foi um trabalho honesto;
+* Ainda terminarei após o feedback, para honrar o tempo estipulado;
+* agradeço pela oportunidade de poder aprender e desenvolver com esta linguagem!;
