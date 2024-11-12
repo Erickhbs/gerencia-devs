@@ -11,7 +11,7 @@ $anuidades = getAnuidades();
         <input type="hidden" name="action" value="create_anuidade">
         <input type="number" name="ano" placeholder="Ano da anuidade" min="<?= date("Y"); ?>" required><br>
         <input type="number" name="valor" placeholder="Valor da anuidade" required><br>
-        <button type="submit">Cadastrar</button><br>
+        <button type="submit" >Cadastrar</button><br>
     </form>
 
     <form action="" method="post">

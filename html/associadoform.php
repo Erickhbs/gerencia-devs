@@ -9,15 +9,36 @@ if ($associadoId) {
 
 ?>
 
+<div class="primeira-linha">
+    <form action="" method="post">
+        <h3 class="form-title">Cadastrar Associado</h3>
+        <input type="hidden" name="action" value="create_associado">
+        <input type="text" name="name" placeholder="Nome e Sobrenome" required><br>
+        <input type="email" name="email" placeholder="Email do Associado" required><br>
+        <input type="text" name="cpf" placeholder="CPF do Associado" required><br>
+        <button type="submit">Cadastrar</button><br>
+    </form>
 
-<form action="" method="post">
-    <h3 class="form-title">Cadastrar Associado</h3>
-    <input type="hidden" name="action" value="create_associado">
-    <input type="text" name="name" placeholder="Nome e Sobrenome" required><br>
-    <input type="email" name="email" placeholder="Email do Associado" required><br>
-    <input type="text" name="cpf" placeholder="CPF do Associado" required><br>
-    <button type="submit">Cadastrar</button><br>
-</form>
+    <?php if ($associadoId): ?>
+        <div class="pagamestos">
+            <h3>Informações do Associado</h3>
+            <p><strong>Nome:</strong> <?= htmlspecialchars($associado['name']); ?></p>
+            <p><strong>Email:</strong> <?= htmlspecialchars($associado['email']); ?></p>
+            <p><strong>CPF:</strong> <?= htmlspecialchars($associado['cpf']); ?></p>
+
+            <h3>Pagamentos</h3>
+            <?php if (!empty($pagamentos)): ?>
+                <ul>
+                    <?php foreach ($pagamentos as $pagamento): ?>
+                        <li>Pagamento ID: <?= $pagamento['ano']; ?> - Valor: <?= $pagamento['valor']; ?> - Status: <?= $pagamento['pago']; ?></li>
+                    <?php endforeach; ?>
+                </ul>
+            <?php else: ?>
+                <p>Nenhum pagamento encontrado para este associado.</p>
+            <?php endif; ?>
+        </div>
+    <?php endif; ?>
+</div>
 
 
 <form action="" method="post">

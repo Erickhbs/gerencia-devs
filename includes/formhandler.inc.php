@@ -61,7 +61,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         case 'update_anuidade':
             $ano = sanitizeInput($_POST["ano"]);
             $valor = sanitizeInput($_POST["valor"]);
-
+            
             break;
 
         case 'update_pagamento':

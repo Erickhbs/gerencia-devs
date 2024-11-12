@@ -49,4 +49,5 @@ $anuidades = getAnuidades();
             <?php endif; ?>
         </div>
     </div>
+    </div>
 </div>

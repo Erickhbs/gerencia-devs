@@ -19,19 +19,15 @@ function createAnuidade($ano, $valor){
             echo "nada feito";
         }
 
-        //criando a query responsável por inserir o associado no bd
         $query = "INSERT INTO anuidade (a_year, a_value) VALUES (?,?);";
 
-        //preparar e inserir na string
         $statement = $pdo->prepare($query);
         $statement->execute([$ano, $valor]);
 
         createPagamento(null, $ano);
 
-        //apenas para limpar o espaço da memoria
         $statement = null;
 
-        // Mensagem de confirmação e botão para voltar
         
 
         die();
@@ -41,9 +37,18 @@ function createAnuidade($ano, $valor){
     }
 }
 
-function updateAnuidade($ano, $valor){
+function updateAnuidade($ano, $valor) {
+    global $pdo;
+    try {
+        $query = "UPDATE anuidades SET valor = ? WHERE ano = ?";
+        $statement = $pdo->prepare($sql);
+        $stmt->execute([$valor, $ano]);
 
+    } catch (PDOException $e) {
+        echo "Erro ao atualizar anuidade: " . $e->getMessage();
+    }
 }
+
 
 function getAnuidades(){
     global $pdo;

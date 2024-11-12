@@ -32,15 +32,20 @@
         </nav>
         <section class="panel">
             <div class="panel-info">
+                <br>
                <?php 
                     if($navegacao == "cadastro_associado"){
                         require './html/associadoform.php';
+                        echo '<br>';
                     }else if($navegacao == "cadastro_anuidade"){
                         require './html/anuidadeform.php';
+                        echo '<br>';
                     }else{
                         require './html/inicio.php';
+                        echo '<br>';
                     }
                ?>
+               <br>
             </div>
         </section>
     </body>
