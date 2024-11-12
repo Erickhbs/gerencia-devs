@@ -1,10 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900&display=swap');
+
 * {
     font-family: 'Poppins', sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
+
 :root {
     /* CORES A SEREM USADAS */
     --body-color: #D9D9D9;
@@ -21,7 +23,7 @@
     --tran-05: all 0.5 ease;
 }
 
-body{
+body {
     width: 100%;
     height: 100%;
     background: var(--body-color);
@@ -41,30 +43,37 @@ html {
     padding: 10px 14px;
     background: var(--sidebar-color);
 }
+
 .sidebar header {
     position: relative;
 }
+
 .sidebar .image-text {
     display: flex;
     align-items: center;
 }
+
 .sidebar .image-text .image {
     width: 60px;
     height: 60px;
     border-radius: 6px;
 }
+
 .sidebar header .image-text .header-text {
     display: flex;
     padding: 10px;
     flex-direction: column;
     color: var(--text-color);
 }
+
 .header-text .name {
     font-weight: 600;
 }
+
 .header-text .professional {
     margin-top: -2px;
 }
+
 .sidebar header .toggle {
     position: absolute;
     top: 50%;
@@ -80,6 +89,7 @@ html {
     color: var(--text-color);
     font-size: 22px;
 }
+
 .sidebar li {
     height: 50px;
     margin-top: 10px;
@@ -90,6 +100,7 @@ html {
     border-radius: 8px;
     transition: var(--tran-05);
 }
+
 .sidebar li a {
     display: flex;
     align-items: center;
@@ -98,36 +109,41 @@ html {
     width: 100%;
     padding: 10px;
 }
+
 .sidebar li .icon {
     font-size: 20px;
     margin-right: 8px;
     transition: var(--tran-05);
 }
+
 .sidebar li .text {
     font-weight: 500;
     transition: var(--tran-05);
 }
+
 .sidebar li:hover {
     background: var(--selection-color);
     color: var(--text-color);
 }
+
 .sidebar li.active {
     background: var(--selection-color);
     color: var(--text-color);
 }
+
 .sidebar li.active .icon,
 .sidebar li.active .text {
     color: var(--text-color);
 }
 
-.panel{
+.panel {
     height: 100vh;
     position: relative;
     left: 275px;
     background: var(--body-color);
 }
 
-.panel{
+.panel {
     padding: 20px 20px;
 }
 
@@ -136,24 +152,97 @@ html {
     border: 6px solid;
     border-radius: 6px;
     width: 100%;
-    color: var(--selection-color); 
+    color: var(--selection-color);
 }
 
 .panel-inicio {
-    display: flex;              
-    justify-content: space-between; 
-    gap: 20px;                    
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
 }
 
 .panel-info {
-    background-color: #f0f0f0;  
+    background-color: var(--body-color);
     padding: 10px;
     border-radius: 5px;
-    width: 80%;                 
+    width: 75%;
     text-align: center;
 }
 
 .titulo-panel {
-    margin: 0;                  
+    margin: 0;
 }
 
+.listagens {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.associado-card {
+    background-color: var(--text-color);
+    border: 1px solid var(--selection-color);
+    border-radius: 8px;
+    padding: 10px;
+    width: 300px;
+    box-shadow: 0 4px 6px rgba(97, 84, 84, 0.1);
+    transition: transform 0.3s ease;
+    text-decoration: none;
+
+}
+
+.associado-card:hover {
+    transform: scale(1.05);
+}
+
+.associado-content {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.icon-user, .icon-email {
+    font-size: 16px;
+}
+
+.nome, .email {
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--toggle-color);
+}
+
+.form-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    color: var(--toggle-color);
+}
+
+form {
+    margin-bottom: 20px;
+    padding: 10px;
+    border: 1px solid var(--selection-color);
+    border-radius: 6px;
+    width: 300px;
+    background-color: var(--body-color);
+}
+
+input[type="text"], input[type="email"],input[type="number"], button {
+    width: 100%;
+    padding: 8px;
+    margin: 5px 0;
+    border-radius: 4px;
+    border: 1px solid var(--body-color);
+}
+
+button {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: var(--selection-color);
+}

@@ -1,6 +1,12 @@
 <?php 
-    require 'includes\bdh.inc.php';   
-
+    /* conexao com o MySQL para usar como bd */
+    include_once 'includes/bdh.inc.php';
+    include_once 'includes/associado.inc.php';
+    include_once 'includes/func-helper.inc.php';
+    include_once 'includes/anuidade.inc.php';
+    include_once 'includes/pagamento.inc.php';
+    include_once 'includes/formhandler.inc.php';
+    
     //criei esta variavel para fazer a função de controller
     $navegacao = $_GET['navegacao'] ?? '';
     $page = isset($_GET['navegacao']) ? $_GET['navegacao'] : 'inicio';
@@ -28,50 +34,14 @@
             <div class="panel-info">
                <?php 
                     if($navegacao == "cadastro_associado"){
-                        require './html/associado.html';
+                        require './html/associadoform.php';
                     }else if($navegacao == "cadastro_anuidade"){
-                        require './html/anuidade.html';
+                        require './html/anuidadeform.php';
                     }else{
-                        require './html/inicio.html';
+                        require './html/inicio.php';
                     }
                ?>
             </div>
         </section>
     </body>
 </html>
-
-
-
-<!-- 
-
-            <h1>Navegação</h1>
-            <"ul>
-                <li><a href="?navegacao=cadastro_anuidade">Anuidade</a></li>
-                <li><a href="?navegacao=cadastro_associado">Associados</a></li>
-                <li>Sobre</li>
-            </ul>"
-
-
-            if($navegacao == "cadastro_associado"){
-                echo
-                '<h3>Cadastrar Associado</h3>
-                <form action="" method="post">
-                    <input type="hidden" name="action" value="create_associado">
-                    <input type="text" name="name" placeholder="nome e sobrenome" required><br>
-                    <input type="email" name="email" placeholder="email do associado" required><br>
-                    <input type="text" name="cpf" placeholder="cpf do associado" required><br>
-                    <button type="submit">Cadastrar</button><br>
-                </form>';
-            }else if($navegacao == "cadastro_anuidade"){
-                echo 
-                '
-                <h3>Cadastrar anuidade</h3>
-                <form action="" method="post">
-                <input type="hidden" name="action" value="create_anuidade">
-                    <input type="number" name="ano" placeholder="anuidade" min="' . date("Y") . '" required><br>
-                    <input type="number" name="valor" placeholder="valor da anuidade" required><br>
-                    <button type="submit">Cadastrar</button><br>
-                </form>
-                ';
-            }
-        -->
