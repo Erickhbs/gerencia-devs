@@ -13,26 +13,46 @@ Consulte **[Implantação](#-implanta%C3%A7%C3%A3o)** para saber como implantar 
 Seu sistema operacional ser Windows
 Você precisa do XAMPP intalado e do PHP
 
-```
-
-```
 
 ### 🔧 Instalação
 
 instalação do XAMPP:
-
     deve se instalar o xampp para ter acesso ao servidor
     MySQL e para uma instalação rapida do PHP
+    ter algum editor de texto de sua preferencia
+
 ```
 https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe/download
 ```
-
-clique em instalar e é só prosseguir com a intalação normal no windows.
+caso não tenha um editor, aconselho o uso do VISUAL STUDIO CODE
 ```
-Até finalizar
+https://code.visualstudio.com/
 ```
+clique em instalar e é só prosseguir com a intalação normal no windows em ambos os softwares.
+Até finalizar e inicializar algumas alterações
 
-Termine com um exemplo de como obter dados do sistema ou como usá-los para uma pequena demonstração.
+Após isso, vá te o local do arquivo onde está intalado o XAMPP 
+um exemplo de como está o path na minha maquina:
+```
+C:\xampp
+```
+E ir na pasta que está em:
+```
+C:\xampp\htdocs
+```
+Comando no PowerShell:
+```
+cd ..
+cd ..
+cd .\xampp\htdocs\
+```
+Apague tudo, baixe o zip do projeto e extraia dentro da pasta.
+
+Caso esteja utilizando o VISUAL STUDIO CODE, algumas coisas precisam ser
+feitas para que ele identifique o PHP que veio junto ao XAMPP.
+Primeiro de tudo abra o editor!
+
+ <img src="https://lh3.google.com/u/0/d/1cEA9J9DV-1x6BXRob5gt79wM23LW8PhS=w1920-h918-iv1" alt="print">
 
 ## ⚙️ Executando os testes
 
