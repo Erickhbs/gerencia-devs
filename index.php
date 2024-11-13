@@ -1,6 +1,24 @@
 <?php 
-    /* conexao com o MySQL para usar como bd */
-    executeInitialSQL();
+    function executeInitialSQL() {
+        global $pdo;
+        
+        try {
+            $sql = file_get_contents('initial-bd.sql');
+
+            $queries = explode(';', $sql);
+            
+            foreach ($queries as $query) {
+                if (trim($query)) {
+                    $pdo->exec($query);
+                }
+            }
+
+            echo "Seed executado com sucesso.";
+        } catch (PDOException $e) {
+            echo "Erro ao executar o seed: " . $e->getMessage();
+        }
+    }
+
 
     include_once 'includes/bdh.inc.php';
     include_once 'includes/associado.inc.php';
@@ -9,7 +27,6 @@
     include_once 'includes/pagamento.inc.php';
     include_once 'includes/formhandler.inc.php';
     
-    //criei esta variavel para fazer a função de controller
     $navegacao = $_GET['navegacao'] ?? '';
     $page = isset($_GET['navegacao']) ? $_GET['navegacao'] : 'inicio';
 
