@@ -1,12 +1,10 @@
 # Gerencia-Devs
 
-Um projeto para o gerente da associação Devs do RN poder ter melhor axesso às informações da associação
+Um projeto para o gerente da associação Devs do RN poder ter melhor acesso às informações da associação
 
 ## 🚀 Começando
 
 Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
-
-Consulte **[Implantação](#-implanta%C3%A7%C3%A3o)** para saber como implantar o projeto.
 
 ### 📋 Pré-requisitos
 
